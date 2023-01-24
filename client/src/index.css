@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 .formContainer{
-    height: 28rem;
-    width: 23rem;
+    height: 32rem;
+    width: 24rem;
+}
+
+.register{
+    width: 19rem;
 }
