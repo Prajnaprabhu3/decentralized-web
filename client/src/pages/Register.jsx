@@ -1,6 +1,8 @@
 import { useState,useEffect } from 'react';
 import  { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+import { registerRoute } from '../utils/apiRoutes';
 
 function Register() {
 const [values,setValues]=useState({
@@ -12,14 +14,22 @@ confirmPassword:""
 
 const handleChange=(e)=>{
 setValues({...values, [e.target.name]:e.target.value});
-console.log(values);
+// console.log(values);
 }
 
 
-const handleSubmit=(e)=>{
+const handleSubmit= async (e)=>{
   e.preventDefault();
   if(handleValidation()){
     // call api 
+    console.log("route working",registerRoute);
+    const { username,email,password,confirmPassword}= values;
+    const { data } =await axios.post(registerRoute,{
+      username,
+      email,
+      password,
+    });
+
   };
 }
 
