@@ -1,10 +1,12 @@
 import { useState,useEffect } from 'react';
-import  { Link } from 'react-router-dom';
+import  { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { registerRoute } from '../utils/apiRoutes';
 
 function Register() {
+const navigate=useNavigate();
+
 const [values,setValues]=useState({
 username:"",
 email:"",
@@ -22,15 +24,27 @@ const handleSubmit= async (e)=>{
   e.preventDefault();
   if(handleValidation()){
     // call api 
-    console.log("route working",registerRoute);
-    const { username,email,password,confirmPassword}= values;
+    // console.log("route working",registerRoute);
+    const { username,email,password}= values;
     const { data } =await axios.post(registerRoute,{
       username,
       email,
       password,
     });
 
-  };
+    if(data.status=== false){
+      toast.error(data.message, toastCustomised)
+    }
+    
+    if(data.status===true){
+      toast.success(`${username} registered successfully `)
+      localStorage.setItem('user',JSON.stringify(data.user));
+      navigate('/');
+    }
+
+   
+
+  }; 
 }
 
 const toastCustomised={
@@ -55,7 +69,7 @@ const handleValidation=(e)=>{
     toast.error('Password & Confirm Password should match',toastCustomised);
     return false;
   }else{
-    toast.success(`${username} registered successfully `)
+    // toast.success(`${username} registered successfully `)
     return true;
   }
 
