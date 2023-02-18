@@ -10,3 +10,9 @@
 .register{
     width: 19rem;
 }
+
+/* login  */
+.formContainerLogin{
+    height:30rem;
+    width: 24rem;
+}

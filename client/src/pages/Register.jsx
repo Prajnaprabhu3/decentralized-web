@@ -4,6 +4,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { registerRoute } from '../utils/apiRoutes';
 
+import Avatar from 'react-avatar';
+
 function Register() {
 const navigate=useNavigate();
 
@@ -18,6 +20,14 @@ const handleChange=(e)=>{
 setValues({...values, [e.target.name]:e.target.value});
 // console.log(values);
 }
+console.log(values);
+
+// to redirect to chat page if user already logged in and in local storage
+useEffect(()=>{
+  if(localStorage.getItem('user')){
+      navigate('/');
+  }
+  },[])
 
 
 const handleSubmit= async (e)=>{
@@ -39,10 +49,11 @@ const handleSubmit= async (e)=>{
     if(data.status===true){
       toast.success(`${username} registered successfully `)
       localStorage.setItem('user',JSON.stringify(data.user));
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+      
     }
-
-   
 
   }; 
 }
@@ -116,6 +127,8 @@ const handleValidation=(e)=>{
       <p className='text-sm font-normal flex justify-center'>Have an account? 
         <Link to='/login' className='font-semibold text-[#F2FDBA]'>&nbsp; Login </Link>
       </p>
+
+      <Avatar name={values.username} rounded={true} size="50" className="rounded-3xl" />
 
 
      </div>
