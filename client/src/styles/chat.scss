@@ -1,0 +1,11 @@
+.chatContainer{
+    // height: 85vh;
+    // width: 85vw;
+    display: grid;
+    grid-template-columns: 25% 75%;
+   
+
+    .chatArea{
+        height: 82%;
+    }
+}

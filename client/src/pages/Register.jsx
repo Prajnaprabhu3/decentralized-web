@@ -128,7 +128,7 @@ const handleValidation=(e)=>{
         <Link to='/login' className='font-semibold text-[#F2FDBA]'>&nbsp; Login </Link>
       </p>
 
-      <Avatar name={values.username} rounded={true} size="50" className="rounded-3xl" />
+      {/* <Avatar name={values.username} rounded={true} size="50" className="rounded-3xl" /> */}
 
 
      </div>
